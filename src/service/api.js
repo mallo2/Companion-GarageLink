@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/v1"; // mettre ip du py
+const API_URL = "http://localhost:8080"; // mettre ip du py
 
 export async function getHealth() {
     const response = await fetch(`${API_URL}/health`);
@@ -7,7 +7,7 @@ export async function getHealth() {
         throw new Error(`Erreur HTTP : ${response.status}`);
     }
 
-    return await response.json();
+    return await response.text();
 }
 
 export async function getTemperature() {

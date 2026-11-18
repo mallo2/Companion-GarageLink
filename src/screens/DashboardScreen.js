@@ -31,7 +31,7 @@ export default function DashboardScreen() {
                 if (mounted) {
                     setHealth(h);
                     setTemperature(t);
-                    setHistory(hist);
+                    setHistory(hist.values);
                     setError(null);
                 }
             } catch (err) {
@@ -59,15 +59,15 @@ export default function DashboardScreen() {
                 <Text style={styles.loading}>Chargement des capteurs...</Text>
             ) : (
                 <>
-                    <Card title="Serveur" value={health?.status ?? "—"} />
+                    <Card title="Serveur" value={health ?? "—"} />
                     <Card title="Température" value={`${temperature.value} °C`} />
 
                     <Text style={styles.section}>Historique</Text>
-                    {history.slice(-10).reverse().map((item, i) => (
-                        <Text key={i} style={styles.historyItem}>
-                            {item.timestamp} : {item.value} °C
-                        </Text>
-                    ))}
+                {history.slice(-10).reverse().map((value, i) => (
+                    <Text key={i} style={styles.historyItem}>
+                        {value} °C
+                    </Text>
+                ))}
                 </>
             )}
         </ScrollView>
